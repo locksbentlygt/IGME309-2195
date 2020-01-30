@@ -3,24 +3,24 @@
 in vec3 Color;
 
 uniform vec3 SolidColor = vec3(-1,-1,-1);
-uniform bool Complimentary = false;
+uniform bool Comp = false;
 
 out vec4 Fragment;
 
 void main()
 {
-	vec3 output = Color;
+	vec3 currColor = Color;
 	if(SolidColor.r != -1.0 && SolidColor.g != -1.0 && SolidColor.b != -1.0)
 	{
-		output = SolidColor;
+		currColor = SolidColor;
 	}
 	
-	if(Complimentary == true)
+	if(Comp == true)
 	{
-		output = vec3(1.0f, 1.0f, 1.0f) - output;
+		currColor = vec3(1.0f, 1.0f, 1.0f) - currColor;//changes the colors to their compliment 
 	}
 	
-	Fragment = vec4(output,1);
+	Fragment = vec4(currColor,1);
 		
 	return;
 }
