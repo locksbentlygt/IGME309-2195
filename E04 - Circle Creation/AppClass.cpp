@@ -4,7 +4,11 @@ void Application::InitVariables(void)
 	//Make MyMesh object
 	m_pMesh = new MyMesh();
 	//Generate a circle
-	m_pMesh->GenerateCircle(2.0f, 5, C_RED);
+	
+	for (float i = 0; i < 69; i++) {
+		glm::vec3 color = glm::vec3(i, 0, 0);
+		m_pMesh->GenerateCircle(2.0f, 10, i*2, color);
+	}
 }
 void Application::Update(void)
 {
