@@ -276,7 +276,27 @@ void MyMesh::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivisions,
 	Init();
 
 	// Replace this with your code
-	GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	//GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	float angle = 360.0f / a_nSubdivisions;
+	float currAngle = 0;
+
+	glm::vec3 center = glm::vec3(0, 0, 0);
+	glm::vec3 baseCenter = glm::vec3(0, 0, 1);
+
+	for (int i = 0; i < a_nSubdivisions; i++)
+	{
+		//calculating the first points of the cone shape and the base
+		glm::vec3 pOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, a_fHeight);
+		glm::vec3 bOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 1);
+		currAngle += angle;
+		//calculating the second points of the cone shape and the base
+		glm::vec3 pTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, a_fHeight);
+		glm::vec3 bTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 1);
+		//drawing each face of the cone 
+		AddTri(center, pOne, pTwo);
+		//drawing each face of the base
+		AddTri(baseCenter, bTwo,bOne);
+	}
 	// -------------------------------
 
 	// Adding information about color
@@ -300,7 +320,29 @@ void MyMesh::GenerateCylinder(float a_fRadius, float a_fHeight, int a_nSubdivisi
 	Init();
 
 	// Replace this with your code
-	GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	//GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	float angle = 360.0f / a_nSubdivisions;
+	float currAngle = 0;
+
+	glm::vec3 center = glm::vec3(0, 0, 0);
+	glm::vec3 baseCenter = glm::vec3(0, 0, 1);
+
+	for (int i = 0; i < a_nSubdivisions; i++)
+	{
+		//initialising the first points on the two base circles
+		glm::vec3 pOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 0);
+		glm::vec3 bOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 1);
+		currAngle += angle;
+		//initialising the second points on the two base circles
+		glm::vec3 pTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 0);
+		glm::vec3 bTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fRadius, glm::sin(glm::radians(currAngle)) * a_fRadius, 1);
+		//drawing the first base circle
+		AddTri(center, pTwo, pOne);
+		//drawing the other base circle
+		AddTri(baseCenter, bOne, bTwo);
+		//drawing the square sides of the cylinder 
+		AddQuad(bTwo, bOne, pTwo, pOne);
+	}
 	// -------------------------------
 
 	// Adding information about color
@@ -330,9 +372,44 @@ void MyMesh::GenerateTube(float a_fOuterRadius, float a_fInnerRadius, float a_fH
 	Init();
 
 	// Replace this with your code
-	GenerateCube(a_fOuterRadius * 2.0f, a_v3Color);
+	//GenerateCube(a_fOuterRadius * 2.0f, a_v3Color);
+
+	// -------------------------------
+	float angle = 360.0f / a_nSubdivisions;
+	float currAngle = 0;
+
+	glm::vec3 center = glm::vec3(0, 0, 0);
+	glm::vec3 baseCenter = glm::vec3(0, 0, 1);
+
+	for (int i = 0; i < a_nSubdivisions; i++)
+	{
+		//initialising the first points on the two base circles
+		glm::vec3 outerOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fOuterRadius, glm::sin(glm::radians(currAngle)) * a_fOuterRadius, 0);
+		glm::vec3 innerOne = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fInnerRadius, glm::sin(glm::radians(currAngle)) * a_fInnerRadius, 0);
+		glm::vec3 outerOneB = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fOuterRadius, glm::sin(glm::radians(currAngle)) * a_fOuterRadius, 1);
+		glm::vec3 innerOneB = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fInnerRadius, glm::sin(glm::radians(currAngle)) * a_fInnerRadius, 1);
+		currAngle += angle;
+		//initialising the second points on the two base circles
+		glm::vec3 outerTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fOuterRadius, glm::sin(glm::radians(currAngle)) * a_fOuterRadius, 0);
+		glm::vec3 innerTwo = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fInnerRadius, glm::sin(glm::radians(currAngle)) * a_fInnerRadius, 0);
+		glm::vec3 outerTwoB = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fOuterRadius, glm::sin(glm::radians(currAngle)) * a_fOuterRadius, 1);
+		glm::vec3 innerTwoB = glm::vec3(glm::cos(glm::radians(currAngle)) * a_fInnerRadius, glm::sin(glm::radians(currAngle)) * a_fInnerRadius, 1);
+	
+		//these are the two rings one either side of the tube 
+		AddQuad(outerTwo, outerOne, innerTwo, innerOne);
+		AddQuad(outerOneB, outerTwoB, innerOneB, innerTwoB);
+
+		//these are the sides of the tube 
+		//outer
+		AddQuad(outerTwoB, outerOneB, outerTwo, outerOne);
+		//inner
+		AddQuad(innerOneB, innerTwoB, innerOne, innerTwo);
+	}
 	// -------------------------------
 
+	// Adding information about color
+	CompleteMesh(a_v3Color);
+	CompileOpenGL3X();
 	// Adding information about color
 	CompleteMesh(a_v3Color);
 	CompileOpenGL3X();
@@ -375,19 +452,42 @@ void MyMesh::GenerateSphere(float a_fRadius, int a_nSubdivisions, vector3 a_v3Co
 		a_fRadius = 0.01f;
 
 	//Sets minimum and maximum of subdivisions
-	if (a_nSubdivisions < 1)
+	if (a_nSubdivisions < 3)
 	{
-		GenerateCube(a_fRadius * 2.0f, a_v3Color);
-		return;
+		a_nSubdivisions = 3;
 	}
-	if (a_nSubdivisions > 6)
-		a_nSubdivisions = 6;
+	if (a_nSubdivisions > 360)
+		a_nSubdivisions = 360;
 
 	Release();
 	Init();
 
 	// Replace this with your code
-	GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	//GenerateCube(a_fRadius * 2.0f, a_v3Color);
+	//this is a vector that stores a vector of verticies
+	//latitude levels of the sphere. iteratoing through each horizontal level of the sphere 
+	for(int i = 0; i < a_nSubdivisions; i++)
+	{
+		//this is claculating the latitude angles
+		float angle1 = glm::radians(360.0f / a_nSubdivisions * i);
+		float angle2 = glm::radians(360.0f / a_nSubdivisions * (i + 1));
+
+		//longitude levels of the sphere --each vertical slice of the sphere 
+		for(int j = 0; j < a_nSubdivisions; j++)
+		{
+			//longitude angles 
+			float angle3 = glm::radians(180.0f / a_nSubdivisions * (j+1));
+			float angle4 = glm::radians(180.0f / a_nSubdivisions * j);
+
+			vector3 quadP1(a_fRadius * glm::cos(angle1) * glm::sin(angle3), a_fRadius * glm::sin(angle1) * glm::sin(angle3), a_fRadius * glm::cos(angle3));
+			vector3 quadP2(a_fRadius * glm::cos(angle1) * glm::sin(angle4), a_fRadius * glm::sin(angle1) * glm::sin(angle4), a_fRadius * glm::cos(angle4));
+			vector3 quadP3(a_fRadius * glm::cos(angle2) * glm::sin(angle3), a_fRadius * glm::sin(angle2) * glm::sin(angle3), a_fRadius * glm::cos(angle3));
+			vector3 quadP4(a_fRadius * glm::cos(angle2) * glm::sin(angle4), a_fRadius * glm::sin(angle2) * glm::sin(angle4), a_fRadius * glm::cos(angle4));
+
+			AddQuad(quadP1, quadP2, quadP3, quadP4);
+		}
+	}
+
 	// -------------------------------
 
 	// Adding information about color
