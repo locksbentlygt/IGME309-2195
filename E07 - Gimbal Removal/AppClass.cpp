@@ -8,6 +8,8 @@ void Application::InitVariables(void)
 }
 void Application::Update(void)
 {
+	m_m4Model = glm::toMat4(m_qOrientation);///NEEEWWWWWWCOOOODDDDee
+
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
 
@@ -16,6 +18,8 @@ void Application::Update(void)
 
 	//Is the first person camera active?
 	CameraRotation();
+
+	
 }
 void Application::Display(void)
 {
@@ -28,11 +32,13 @@ void Application::Display(void)
 	m_m4Model = glm::rotate(IDENTITY_M4, glm::radians(m_v3Rotation.x), vector3(1.0f, 0.0f, 0.0f));
 	m_m4Model = glm::rotate(m_m4Model, glm::radians(m_v3Rotation.y), vector3(0.0f, 1.0f, 0.0f));
 	m_m4Model = glm::rotate(m_m4Model, glm::radians(m_v3Rotation.z), vector3(0.0f, 0.0f, 1.0f));
-	m_pMesh->Render(m4Projection, m4View, ToMatrix4(m_m4Model));
+	//m_pMesh->Render(m4Projection, m4View, ToMatrix4(m_m4Model));
 
 	//m_qOrientation = m_qOrientation * glm::angleAxis(glm::radians(1.0f), vector3(1.0f));
-	//m_pMesh->Render(m4Projection, m4View, ToMatrix4(m_qOrientation));
+	m_pMesh->Render(m4Projection, m4View, ToMatrix4(m_qOrientation));
 	
+	//m_m4Model = glm::toMat4(m_qOrientation);///NEEEWWWWWWCOOOODDDDee
+
 	// draw a skybox
 	m_pMeshMngr->AddSkyboxToRenderList();
 	

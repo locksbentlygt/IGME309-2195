@@ -154,7 +154,7 @@ public:
 	-	vector3 a_v3Color -> Color of the mesh
 	OUTPUT: ---
 	*/
-	void GenerateCircle(float a_fRadius, int a_nSubdivisions, vector3 a_v3Color = C_WHITE);
+	void GenerateCircle(float a_fRadius, int a_nSubdivisions, int zIndex, vector3 a_v3Color = C_WHITE);
 	/*
 	USAGE: Generates a cylinder mesh
 	ARGUMENTS:
