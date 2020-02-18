@@ -133,6 +133,11 @@ void AppClass::Display(void)
 	matrix4 m4View;//view matrix
 	matrix4 m4Projection;//projection matrix
 
+	vector4 v4Temp(.5f, .0f, .0f, 1.0f);
+
+	m_m4Model[3] = v4Temp;//gives the last row of the matrix
+
+
 	//read uniforms and send values
 	GLuint MVP = glGetUniformLocation(m_uShaderProgramID, "MVP");//Model View Projection
 	glUniformMatrix4fv(MVP, 1, GL_FALSE, glm::value_ptr(m4Projection * m4View * m_m4Model));

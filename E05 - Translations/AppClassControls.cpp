@@ -377,8 +377,8 @@ void Application::CameraRotation(float a_fSpeed)
 		fAngleX += fDeltaMouse * a_fSpeed;
 	}
 	//Change the Yaw and the Pitch of the camera
-	m_pCameraMngr->ChangeYaw(fAngleY * 3.0f);
-	m_pCameraMngr->ChangePitch(-fAngleX * 3.0f);
+	m_pCameraMngr->ChangeYaw(fAngleY * 0.25f);
+	m_pCameraMngr->ChangePitch(-fAngleX * 0.25f);
 	SetCursorPos(CenterX, CenterY);//Position the mouse in the center
 }
 //Keyboard
@@ -414,32 +414,6 @@ void Application::ProcessKeyboard(void)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		m_pCameraMngr->MoveVertical(fSpeed);
 #pragma endregion
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-	{
-		if (fMultiplier)
-			m_v3Rotation.x -= 1.0f;
-		else
-			m_v3Rotation.x += 1.0f;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
-	{
-		if (fMultiplier)
-			m_v3Rotation.y -= 1.0f;
-		else
-			m_v3Rotation.y += 1.0f;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-	{
-		if (fMultiplier)
-			//glm::angleAxis(glm::radians(1), AXID_)
-			m_v3Rotation.z -= 1.0f;
-		else
-			m_v3Rotation.z += 1.0f;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-	{
-		m_v3Rotation = vector3(0.0f);
-	}
 }
 //Joystick
 void Application::ProcessJoystick(void)
