@@ -8,6 +8,8 @@ void Application::InitVariables(void)
 }
 void Application::Update(void)
 {
+	m_m4Model = glm::toMat4(m_qOrientation);///NEEEWWWWWWCOOOODDDDee
+
 	//Update the system so it knows how much time has passed since the last call
 	m_pSystem->Update();
 
@@ -16,6 +18,8 @@ void Application::Update(void)
 
 	//Is the first person camera active?
 	CameraRotation();
+
+	
 }
 void Application::Display(void)
 {
