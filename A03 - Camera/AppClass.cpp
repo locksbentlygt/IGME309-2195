@@ -9,6 +9,9 @@ void Application::InitVariables(void)
 	//(I'm at [0,0,10], looking at [0,0,0] and up is the positive Y axis)
 	m_pCameraMngr->SetPositionTargetAndUpward(AXIS_Z * 10.0f, ZERO_V3, AXIS_Y);
 
+	vector3 newVector = glm::rotate(glm::quat(), AXIS_X);//this is how you rotate the axis x and attatch it to a quaternion 
+	//to get the new target the pos added to the new forward vector
+
 	//init the camera
 	m_pCamera = new MyCamera();
 	m_pCamera->SetPositionTargetAndUpward(
