@@ -203,13 +203,14 @@ void MyCamera::RotateCamera(float xPos, float yPos)
 	//quaternion rotVert = glm::angleAxis(-a_fDistance, right);
 	//m_v3Target = (rotVert * (m_v3Target + m_v3Position));
 	//m_v3Above = (glm::normalize(rotVert * (m_v3Above + m_v3Position)));
-	quaternion rotHoriz = glm::angleAxis(glm::radians(yPos), right);//up
-	quaternion rotVert = glm::angleAxis(glm::radians(xPos), up);//right
+
+	quaternion rotHoriz = glm::angleAxis(glm::radians(-yPos*5),AXIS_Y);//up
+	quaternion rotVert = glm::angleAxis(glm::radians(-xPos*5), glm::normalize(right));//right
 	
-	forward = glm::rotate(glm::cross(rotHoriz, rotVert), glm::normalize(m_v3Target - m_v3Position));
-	right = glm::normalize(glm::cross(forward, up));
+	forward = forward * (rotHoriz* rotVert);
+	right = right * rotHoriz;
 	
-	up = m_v3Above + m_v3Position;
+	//up = m_v3Above + m_v3Position;
 	
 	m_v3Target = m_v3Position + forward;
 
