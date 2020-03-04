@@ -55,29 +55,58 @@ void Application::Display(void)
 	default:
 	case 1:
 		m_pCamera->ResetCamera();
-		V3position = vector3(0, 0, -15);
-		V3target = vector3(0.0f);
-		V3Up = -AXIS_Y;
-		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
-		m_pCamera->SetNearFar(vector2(4,1000));
 		break;
 	case 2:
 		m_pCamera->ResetCamera();
+		V3position = vector3(0, 0, 20);
+		V3target = vector3(0.0f);
+		V3Up = AXIS_Y;
+		m_pCamera->SetPerspective(false);
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(4, 1000));
 		break;
 	case 3:
 		m_pCamera->ResetCamera();
+		m_pCamera->SetPerspective(false);
+		V3position = vector3(10,0,0);
+		V3target = vector3(0.0f,0.0f,-1.0f);
+		V3Up = -AXIS_Z;
+		m_pCamera->SetVerticalPlanes(vector2(-10.0f, 10.0f));
+		m_pCamera->SetHorizontalPlanes(vector2(-10.0f,10.0f));
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(4, 11000));
 		break;
 	case 4:
 		m_pCamera->ResetCamera();
+		V3position = vector3(0, 0, -15);
+		V3target = vector3(0.0f);
+		V3Up = AXIS_Y;
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(4, 1000));
 		break;
 	case 5:
 		m_pCamera->ResetCamera();
+		V3position = vector3(0, 0, -15);
+		V3target = vector3(0.0f);
+		V3Up = AXIS_Y;
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(6, 1000));
 		break;
 	case 6:
 		m_pCamera->ResetCamera();
+		V3position = vector3(0, 0, -15);
+		V3target = vector3(0.0f);
+		V3Up = AXIS_Y;
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(4, 10));
 		break;
 	case 7:
 		m_pCamera->ResetCamera();
+		V3position = vector3(0, 0, 10);
+		V3target = vector3(0.0f);
+		V3Up = -AXIS_Y;
+		m_pCamera->SetPositionTargetAndUpward(V3position, V3target, V3Up);
+		m_pCamera->SetNearFar(vector2(4, 1000));
 		break;
 	}
 

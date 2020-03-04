@@ -16,6 +16,9 @@ void Simplex::MyCamera::SetHorizontalPlanes(vector2 a_v2Horizontal) { m_v2Horizo
 void Simplex::MyCamera::SetVerticalPlanes(vector2 a_v2Vertical) { m_v2Vertical = a_v2Vertical; }
 matrix4 Simplex::MyCamera::GetProjectionMatrix(void) { return m_m4Projection; }
 matrix4 Simplex::MyCamera::GetViewMatrix(void) { CalculateViewMatrix(); return m_m4View; }
+float pitch;
+float yaw;
+
 
 Simplex::MyCamera::MyCamera()
 {
@@ -153,10 +156,62 @@ void Simplex::MyCamera::CalculateProjectionMatrix(void)
 void MyCamera::MoveForward(float a_fDistance)
 {
 	//The following is just an example and does not take in account the forward vector (AKA view vector)
-	m_v3Position += vector3(0.0f, 0.0f,-a_fDistance);
-	m_v3Target += vector3(0.0f, 0.0f, -a_fDistance);
-	m_v3Above += vector3(0.0f, 0.0f, -a_fDistance);
+	//this only moves in global coordinates 
+	//m_v3Position += vector3(0.0f, 0.0f,-a_fDistance);
+	//m_v3Target += vector3(0.0f, 0.0f, -a_fDistance);
+	//m_v3Above += vector3(0.0f, 0.0f, -a_fDistance);
+	forward = m_v3Target - m_v3Position; // this is calculating the updated forward vector for the camera to move
+	 up = m_v3Position - m_v3Above;// this will calculate the updated upward vector for the camera to move in 
+	right = glm::cross(forward, up); // this calculates the updated right vector for the cam to move in 
+
+
+	m_v3Position += forward * a_fDistance; //this adds the current forward vector to the position so that its updated properly
+	m_v3Target += forward * a_fDistance;//this adds the current forward vector to the target position so that its updated properly
+	m_v3Above += forward * a_fDistance;//this adds the current forward vector to the above position so that its updated properly
 }
 
-void MyCamera::MoveVertical(float a_fDistance){}//Needs to be defined
-void MyCamera::MoveSideways(float a_fDistance){}//Needs to be defined
+void MyCamera::MoveVertical(float a_fDistance)
+{
+
+	 forward = m_v3Target - m_v3Position; // this is calculating the updated forward vector for the camera to move
+	 up = m_v3Position - m_v3Above;// this will calculate the updated upward vector for the camera to move in 
+	 right = glm::cross(forward, up); // this calculates the updated right vector for the cam to move in 
+
+
+	m_v3Position += up * a_fDistance; //this adds the current forward vector to the position so that its updated properly
+	m_v3Target += up * a_fDistance;//this adds the current forward vector to the target position so that its updated properly
+	m_v3Above += up * a_fDistance;//this adds the current forward vector to the above position so that its updated properly
+
+}//Needs to be defined
+void MyCamera::MoveSideways(float a_fDistance)
+{
+
+	 forward = m_v3Target - m_v3Position; // this is calculating the updated forward vector for the camera to move
+	 up = m_v3Position - m_v3Above;// this will calculate the updated upward vector for the camera to move in 
+	 right = glm::cross(forward, up); // this calculates the updated right vector for the cam to move in 
+
+
+	m_v3Position += right * a_fDistance; //this adds the current forward vector to the position so that its updated properly
+	m_v3Target += right * a_fDistance;//this adds the current forward vector to the target position so that its updated properly
+	m_v3Above += right * a_fDistance;//this adds the current forward vector to the above position so that its updated properly
+}//Needs to be defined
+
+void MyCamera::RotateCamera(float xPos, float yPos)
+{
+	
+
+	//quaternion rotVert = glm::angleAxis(-a_fDistance, right);
+	//m_v3Target = (rotVert * (m_v3Target + m_v3Position));
+	//m_v3Above = (glm::normalize(rotVert * (m_v3Above + m_v3Position)));
+	quaternion rotHoriz = glm::angleAxis(glm::radians(yPos), right);//up
+	quaternion rotVert = glm::angleAxis(glm::radians(xPos), up);//right
+	
+	forward = glm::rotate(glm::cross(rotHoriz, rotVert), glm::normalize(m_v3Target - m_v3Position));
+	right = glm::normalize(glm::cross(forward, up));
+	
+	up = m_v3Above + m_v3Position;
+	
+	m_v3Target = m_v3Position + forward;
+
+}
+

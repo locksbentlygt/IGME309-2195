@@ -16,6 +16,10 @@ class MyCamera
 	vector3 m_v3Target = vector3(0.0f, 0.0f, 0.0f); //What I'm looking at
 	vector3 m_v3Above = vector3(0.0f, 1.0f, 0.0f); //What is above the camera
 
+	vector3 forward = vector3(0.0f,0.0f,1.0f);// this is calculating the updated forward vector for the camera to move
+	vector3 up = vector3(0.0f, 1.0f, 0.0f);// this will calculate the updated upward vector for the camera to move in 
+	vector3 right = vector3(1.0f, 0.0f, 0.0f); // this calculates the updated right vector for the cam to move in 
+
 	bool m_bPerspective = true; //perspective view? False is Orthographic
 
 	float m_fFOV = 45.0f; //Field of View
@@ -230,6 +234,15 @@ public:
 	OUTPUT: ---
 	*/
 	void MoveSideways(float a_fDistance = 0.1f);
+
+	void RotateCamera(float xPos, float yPos);
+	/*
+	USAGE: Rotates the camera angle vertically 
+	ARGUMENTS: float a_fDistance = 0.1f -> amount of movement
+	OUTPUT: ---
+	*/
+
+
 };
 
 } //namespace Simplex
