@@ -294,7 +294,7 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 	//i refrenced the book on real time collision detection (The Orange Book) p.104 while working on this 
 	//the radius of the two objects
 	float RadiusA, RadiusB;
-	
+
 	//the two rotation matricies 
 	matrix3 R, absR;
 	vector3 t;
@@ -309,8 +309,8 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 	//get the translation vector t
 	t = a_pOther->GetCenterGlobal() - this->GetCenterGlobal();
 	//bring the translation into a's coordinate frame 
-	t = vector3(glm::dot(t, vector3(this->m_m4ToWorld[0])), glm::dot(t, vector3(this->m_m4ToWorld[1])), glm::dot(t, vector3(this->m_m4ToWorld[2])));
-	
+	t = vector3(glm::dot(t, vector3(this->m_m4ToWorld[0])), glm::dot(t, vector3(this->m_m4ToWorld[2])), glm::dot(t, vector3(this->m_m4ToWorld[2])));
+	glm::dot(t, vector3(this->m_m4ToWorld[0]) );
 	//Compute common subexpressions. Add in an epsilon term to
 		//counteract arithmatic errors when two edges are parrallel and 
 		//their cross product is null
@@ -322,63 +322,63 @@ uint MyRigidBody::SAT(MyRigidBody* const a_pOther)
 
 	//test axes L = A0, L = A1, L=A2;
 	for(int i = 0; i < 3; i++){
-		RadiusA = this->m_v3HalfWidth[i];
-		RadiusB = a_pOther->m_v3HalfWidth[0] * absR[i][0] + a_pOther->m_v3HalfWidth[1] * absR[i][1] + a_pOther->m_v3HalfWidth[2] * absR[i][2];
-		if(glm::abs(t[i]) > RadiusA + RadiusB) 	return 1;
+		RadiusA = this->GetHalfWidth()[i];
+		RadiusB = a_pOther->GetHalfWidth()[0] * absR[i][0] + a_pOther->GetHalfWidth()[1] * absR[i][1] + a_pOther->GetHalfWidth()[2] * absR[i][2];
+		if(glm::abs(t[i]) > RadiusA + RadiusB) 	return eSATResults::SAT_NONE;
 	}
 
 	//test axes L = B0, L = B1, L=B2;
 	for (int i = 0; i < 3; i++) {
-		RadiusA = a_pOther->m_v3HalfWidth[i];
-		RadiusB = this->m_v3HalfWidth[0] * absR[0][i] + a_pOther->m_v3HalfWidth[1] * absR[1][i] + a_pOther->m_v3HalfWidth[2] * absR[2][i];
-		if (glm::abs(t[0] * R[0][i] + t[1] *R[1][i] + t[2] * R[2][i]) > RadiusA + RadiusB) 	return 1;
+		RadiusA = a_pOther->GetHalfWidth()[i];
+		RadiusB = this->GetHalfWidth()[0] * absR[0][i] + a_pOther->GetHalfWidth()[1] * absR[1][i] + a_pOther->GetHalfWidth()[2] * absR[2][i];
+		if (glm::abs(t[0] * R[0][i] + t[1] *R[1][i] + t[2] * R[2][i]) > RadiusA + RadiusB) 	return eSATResults::SAT_NONE;
 	}
 
 	//Test axis L = A0 * B0
-	RadiusA = this->m_v3HalfWidth[1] * absR[2][0] + this->m_v3HalfWidth[2] * absR[1][0];
-	RadiusB = a_pOther->m_v3HalfWidth[1] * absR[0][2] + a_pOther->m_v3HalfWidth[2] * absR[0][1];
-	if(float r = glm::abs(t[2] * R[1][0] - t[1] * R[2][0]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[1] * absR[2][0] + this->GetHalfWidth()[2] * absR[1][0];
+	RadiusB = a_pOther->GetHalfWidth()[1] * absR[0][2] + a_pOther->GetHalfWidth()[2] * absR[0][1];
+	if(glm::abs(t[2] * R[1][0] - t[1] * R[2][0]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A0 * B1
-	RadiusA = this->m_v3HalfWidth[1] * absR[2][1] + this->m_v3HalfWidth[2] * absR[1][1];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[0][2] + a_pOther->m_v3HalfWidth[2] * absR[0][0];
-	if (float r = glm::abs(t[2] * R[1][1] - t[1] * R[2][1]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[1] * absR[2][1] + this->GetHalfWidth()[2] * absR[1][1];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[0][2] + a_pOther->GetHalfWidth()[2] * absR[0][0];
+	if (glm::abs(t[2] * R[1][1] - t[1] * R[2][1]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A0 * B2
-	RadiusA = this->m_v3HalfWidth[1] * absR[2][2] + this->m_v3HalfWidth[2] * absR[1][2];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[0][1] + a_pOther->m_v3HalfWidth[1] * absR[0][0];
-	if (float r = glm::abs(t[2] * R[1][2] - t[1] * R[2][2]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[1] * absR[2][2] + this->GetHalfWidth()[2] * absR[1][2];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[0][1] + a_pOther->GetHalfWidth()[1] * absR[0][0];
+	if (glm::abs(t[2] * R[1][2] - t[1] * R[2][2]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A1 * B0
-	RadiusA = this->m_v3HalfWidth[0] * absR[2][0] + this->m_v3HalfWidth[2] * absR[0][0];
-	RadiusB = a_pOther->m_v3HalfWidth[1] * absR[1][2] + a_pOther->m_v3HalfWidth[2] * absR[1][1];
-	if (float r = glm::abs(t[0] * R[2][0] - t[2] * R[0][0]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[2][0] + this->GetHalfWidth()[2] * absR[0][0];
+	RadiusB = a_pOther->GetHalfWidth()[1] * absR[1][2] + a_pOther->GetHalfWidth()[2] * absR[1][1];
+	if (glm::abs(t[0] * R[2][0] - t[2] * R[0][0]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A1 * B1
-	RadiusA = this->m_v3HalfWidth[0] * absR[2][1] + this->m_v3HalfWidth[2] * absR[0][1];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[1][2] + a_pOther->m_v3HalfWidth[2] * absR[1][0];
-	if (float r = glm::abs(t[0] * R[2][1] - t[2] * R[0][1]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[2][1] + this->GetHalfWidth()[2] * absR[0][1];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[1][2] + a_pOther->GetHalfWidth()[2] * absR[1][0];
+	if (glm::abs(t[0] * R[2][1] - t[2] * R[0][1]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A1 * B2
-	RadiusA = this->m_v3HalfWidth[0] * absR[2][2] + this->m_v3HalfWidth[2] * absR[0][2];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[1][1] + a_pOther->m_v3HalfWidth[1] * absR[1][0];
-	if (float r = glm::abs(t[0] * R[2][2] - t[2] * R[0][2]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[2][2] + this->GetHalfWidth()[2] * absR[0][2];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[1][1] + a_pOther->GetHalfWidth()[1] * absR[1][0];
+	if (glm::abs(t[0] * R[2][2] - t[2] * R[0][2]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A2 * B0
-	RadiusA = this->m_v3HalfWidth[0] * absR[1][0] + this->m_v3HalfWidth[1] * absR[0][0];
-	RadiusB = a_pOther->m_v3HalfWidth[1] * absR[2][2] + a_pOther->m_v3HalfWidth[2] * absR[2][1];
-	if (float r = glm::abs(t[1] * R[0][0] - t[0] * R[1][0]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[1][0] + this->GetHalfWidth()[1] * absR[0][0];
+	RadiusB = a_pOther->GetHalfWidth()[1] * absR[2][2] + a_pOther->GetHalfWidth()[2] * absR[2][1];
+	if (glm::abs(t[1] * R[0][0] - t[0] * R[1][0]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A2 * B1
-	RadiusA = this->m_v3HalfWidth[0] * absR[1][1] + this->m_v3HalfWidth[1] * absR[0][1];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[2][2] + a_pOther->m_v3HalfWidth[2] * absR[2][0];
-	if (float r = glm::abs(t[1] * R[0][1] - t[0] * R[1][1]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[1][1] + this->GetHalfWidth()[1] * absR[0][1];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[2][2] + a_pOther->GetHalfWidth()[2] * absR[2][0];
+	if (glm::abs(t[1] * R[0][1] - t[0] * R[1][1]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	//Test axis L = A2 * B2
-	RadiusA = this->m_v3HalfWidth[0] * absR[1][2] + this->m_v3HalfWidth[1] * absR[0][2];
-	RadiusB = a_pOther->m_v3HalfWidth[0] * absR[2][1] + a_pOther->m_v3HalfWidth[1] * absR[2][0];
-	if (float r = glm::abs(t[1] * R[0][2] - t[0] * R[1][2]) >= RadiusA + RadiusB) return 1;
+	RadiusA = this->GetHalfWidth()[0] * absR[1][2] + this->GetHalfWidth()[1] * absR[0][2];
+	RadiusB = a_pOther->GetHalfWidth()[0] * absR[2][1] + a_pOther->GetHalfWidth()[1] * absR[2][0];
+	if (glm::abs(t[1] * R[0][2] - t[0] * R[1][2]) > RadiusA + RadiusB) return eSATResults::SAT_NONE;
 
 	// if the check passes all these checks then the objs are intersectiong one another 
-	return eSATResults::SAT_NONE;
+	return 1;
 }
