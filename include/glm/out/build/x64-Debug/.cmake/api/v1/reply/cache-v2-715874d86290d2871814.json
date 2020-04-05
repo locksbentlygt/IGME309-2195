@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/Profiles/jtb3607/source/repos/IGME309-2195/include/glm/out/build/x64-Debug"
+			"value" : "c:/Users/bullo/source/repos/IGME309-2195/include/glm/out/build/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -83,7 +83,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -95,7 +95,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -107,7 +107,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -123,7 +123,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.24.28314/bin/HostX64/x64/cl.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/HostX64/x64/cl.exe"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -235,7 +235,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.24.28314/bin/HostX64/x64/cl.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/HostX64/x64/cl.exe"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -511,7 +511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/Profiles/jtb3607/source/repos/IGME309-2195/include/glm"
+			"value" : "C:/Users/bullo/source/repos/IGME309-2195/include/glm"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -523,7 +523,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "D:/Profiles/jtb3607/Source/Repos/IGME309-2195/include/glm/out/install/x64-Debug"
+			"value" : "C:/Users/bullo/Source/Repos/IGME309-2195/include/glm/out/install/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/link.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/link.exe"
 		},
 		{
 			"name" : "CMAKE_MAKE_PROGRAM",
@@ -551,7 +551,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -827,7 +827,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.15"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.15"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1071,7 +1071,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Profiles/jtb3607/source/repos/IGME309-2195/include/glm/out/build/x64-Debug"
+			"value" : "C:/Users/bullo/source/repos/IGME309-2195/include/glm/out/build/x64-Debug"
 		},
 		{
 			"name" : "Project_SOURCE_DIR",
@@ -1083,7 +1083,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Profiles/jtb3607/source/repos/IGME309-2195/include/glm"
+			"value" : "C:/Users/bullo/source/repos/IGME309-2195/include/glm"
 		}
 	],
 	"kind" : "cache",
