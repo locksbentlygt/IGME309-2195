@@ -43,6 +43,12 @@ public:
 	-	String a_sUniqueID -> Name wanted as identifier, if not available will generate one
 	OUTPUT: ---
 	*/
+	PEntity* GetEntityArray(void);
+	/*
+	USAGE: returns the entity array 
+	ARGUMENTS:---
+	OUTPUT: the entity array 
+	*/
 	void AddEntity(String a_sFileName, String a_sUniqueID = "NA");
 	/*
 	USAGE: Deletes the MyEntity Specified by unique ID and removes it from the list

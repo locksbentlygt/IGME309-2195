@@ -46,6 +46,7 @@ int Simplex::MyEntityManager::GetEntityIndex(String a_sUniqueID)
 }
 //Accessors
 Simplex::uint Simplex::MyEntityManager::GetEntityCount(void) {	return m_uEntityCount; }
+Simplex::MyEntityManager::PEntity* Simplex::MyEntityManager::GetEntityArray(void) { return m_mEntityArray; }
 Simplex::Model* Simplex::MyEntityManager::GetModel(uint a_uIndex)
 {
 	//if the list is empty return
@@ -182,6 +183,7 @@ void Simplex::MyEntityManager::Update(void)
 		}
 	}
 }
+
 void Simplex::MyEntityManager::AddEntity(String a_sFileName, String a_sUniqueID)
 {
 	//Create a temporal entity to store the object
